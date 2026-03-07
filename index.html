@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Bakteriler Suyu Temizleyebilir mi?</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+margin:0;
+color:white;
+overflow:hidden;
+
+background:
+linear-gradient(rgba(0,0,40,0.7), rgba(0,0,80,0.7)),
+url("https://images.unsplash.com/photo-1581092919535-7146ff1c38c9");
+
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+}
+
+/* SAYFALAR */
+
+.page{
+display:none;
+padding:60px;
+}
+
+.active{
+display:block;
+}
+
+/* BUTON */
+
+button{
+padding:12px 20px;
+margin:10px;
+font-size:16px;
+border:none;
+border-radius:8px;
+background:#2b8cff;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#1b6fd6;
+}
+
+/* MESAJ */
+
+.message{
+font-size:22px;
+margin-top:25px;
+font-weight:bold;
+}
+
+/* BAKTERİ ANİMASYONU */
+
+.bacteria{
+position:fixed;
+width:25px;
+height:25px;
+background:#7cffc4;
+border-radius:50%;
+opacity:0.6;
+animation:float linear infinite;
+}
+
+/* farklı hızlar */
+
+.bacteria:nth-child(1){ left:10%; animation-duration:20s;}
+.bacteria:nth-child(2){ left:25%; animation-duration:18s;}
+.bacteria:nth-child(3){ left:40%; animation-duration:22s;}
+.bacteria:nth-child(4){ left:55%; animation-duration:17s;}
+.bacteria:nth-child(5){ left:70%; animation-duration:21s;}
+.bacteria:nth-child(6){ left:85%; animation-duration:19s;}
+
+@keyframes float{
+
+0%{
+top:100%;
+transform:rotate(0deg);
+}
+
+100%{
+top:-50px;
+transform:rotate(360deg);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HAREKET EDEN BAKTERİLER -->
+
+<div class="bacteria"></div>
+<div class="bacteria"></div>
+<div class="bacteria"></div>
+<div class="bacteria"></div>
+<div class="bacteria"></div>
+<div class="bacteria"></div>
+
+
+<!-- SAYFA 1 -->
+
+<div class="page active" id="page1">
+
+<h1>Bir Bakteri Suyu Temizleyebilir mi?</h1>
+
+<p>
+Kirli sular çevre için büyük bir problemdir.
+<br><br>
+Peki mikroorganizmalar bu soruna çözüm olabilir mi?
+</p>
+
+<p class="message" id="visitorMessage"></p>
+
+<button onclick="nextPage(2)">
+Denemek ister misin?
+</button>
+
+</div>
+
+
+<!-- SAYFA 2 -->
+
+<div class="page" id="page2">
+
+<h2>Kirli suyu nasıl temizlersin?</h2>
+
+<button onclick="alert('Filtreler bazı kirleri tutabilir.')">
+Filtre kullanırım
+</button>
+
+<button onclick="alert('Kimyasallar kullanılabilir.')">
+Kimyasal eklerim
+</button>
+
+<button onclick="alert('Doğru! Bazı bakteriler suyun temizlenmesine yardımcı olabilir.')">
+🦠 Bakteri kullanırım
+</button>
+
+<br><br>
+
+<button onclick="nextPage(3)">
+Devam
+</button>
+
+</div>
+
+
+<!-- SAYFA 3 -->
+
+<div class="page" id="page3">
+
+<h1>Bacillus subtilis</h1>
+
+<p>
+• toprakta yaşayan bir bakteridir<br><br>
+• organik maddeleri parçalayabilir<br><br>
+• biyoteknolojide kullanılır
+</p>
+
+<button onclick="nextPage(4)">
+Projemizde ne yaptık?
+</button>
+
+</div>
+
+
+<!-- SAYFA 4 -->
+
+<div class="page" id="page4">
+
+<h1>Projemiz</h1>
+
+<p>
+
+1️⃣ kirli su örnekleri hazırlandı<br><br>
+
+2️⃣ Bacillus subtilis kullanıldı<br><br>
+
+3️⃣ suyun arıtma parametreleri analiz edildi
+
+</p>
+
+<b>Amaç:</b> bakterilerin su arıtmada kullanılma potansiyelini araştırmak.
+
+<br><br>
+
+<button onclick="nextPage(5)">
+Bilim Testi
+</button>
+
+</div>
+
+
+<!-- SAYFA 5 -->
+
+<div class="page" id="page5">
+
+<h1>Bilim Testi</h1>
+
+<p><b>Bakteriler sadece hastalık yapar.</b></p>
+
+<button onclick="quizWrong()">Doğru</button>
+
+<button onclick="quizCorrect()">Yanlış</button>
+
+<p id="quizResult"></p>
+
+<br>
+
+<button onclick="nextPage(6)">
+Son Sayfa
+</button>
+
+</div>
+
+
+<!-- SAYFA 6 -->
+
+<div class="page" id="page6">
+
+<h1>Teşekkürler!</h1>
+
+<p>
+
+Bu projeyi 6. sınıf öğrencileri olarak araştırdık.
+
+<br><br>
+
+Standımızı ziyaret etmeyi unutmayın.
+
+</p>
+
+<h3>Artık mikro kahramanları tanıyorsun 🦠</h3>
+
+</div>
+
+
+<script>
+
+/* SAYFA GEÇİŞ */
+
+function nextPage(num){
+
+let pages=document.querySelectorAll(".page");
+
+pages.forEach(p=>p.classList.remove("active"));
+
+document.getElementById("page"+num).classList.add("active");
+
+}
+
+/* ZİYARETÇİ SAYACI */
+
+let count=localStorage.getItem("visitorCount");
+
+if(!count){
+count=1;
+}else{
+count++;
+}
+
+localStorage.setItem("visitorCount",count);
+
+document.getElementById("visitorMessage").innerHTML =
+"🧪 Bakterilerin suyu arıtabildiğini öğrenen <b>"+count+".</b> kişisiniz!";
+
+
+/* QUIZ */
+
+function quizCorrect(){
+document.getElementById("quizResult").innerHTML =
+"✅ Doğru! Bazı bakteriler çevre temizliğinde kullanılabilir.";
+}
+
+function quizWrong(){
+document.getElementById("quizResult").innerHTML =
+"❌ Aslında yanlış. Bazı bakteriler çevreyi temizleyebilir.";
+}
+
+</script>
+
+</body>
+</html>
