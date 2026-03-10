@@ -2,16 +2,16 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bakteriler Suyu Temizleyebilir mi?</title>
 
 <style>
 
 body{
-font-family:Arial;
+font-family:Arial, sans-serif;
 text-align:center;
 margin:0;
 color:white;
-overflow:hidden;
 
 background:
 linear-gradient(rgba(0,0,40,0.7), rgba(0,0,80,0.7)),
@@ -22,43 +22,48 @@ background-position:center;
 background-attachment:fixed;
 }
 
-/* SAYFALAR */
-
 .page{
 display:none;
-padding:60px;
+padding:40px;
 }
 
 .active{
 display:block;
 }
 
-/* BUTON */
-
 button{
-padding:12px 20px;
+padding:12px 22px;
 margin:10px;
 font-size:16px;
 border:none;
-border-radius:8px;
+border-radius:10px;
 background:#2b8cff;
 color:white;
 cursor:pointer;
+transition:0.3s;
 }
 
 button:hover{
 background:#1b6fd6;
+transform:scale(1.05);
 }
 
-/* MESAJ */
+.card{
+background:rgba(255,255,255,0.15);
+padding:25px;
+border-radius:15px;
+max-width:600px;
+margin:auto;
+backdrop-filter:blur(5px);
+}
 
 .message{
-font-size:22px;
-margin-top:25px;
+font-size:20px;
+margin-top:20px;
 font-weight:bold;
 }
 
-/* BAKTERİ ANİMASYONU */
+/* bakteriler */
 
 .bacteria{
 position:fixed;
@@ -70,14 +75,11 @@ opacity:0.6;
 animation:float linear infinite;
 }
 
-/* farklı hızlar */
-
 .bacteria:nth-child(1){ left:10%; animation-duration:20s;}
-.bacteria:nth-child(2){ left:25%; animation-duration:18s;}
-.bacteria:nth-child(3){ left:40%; animation-duration:22s;}
-.bacteria:nth-child(4){ left:55%; animation-duration:17s;}
-.bacteria:nth-child(5){ left:70%; animation-duration:21s;}
-.bacteria:nth-child(6){ left:85%; animation-duration:19s;}
+.bacteria:nth-child(2){ left:30%; animation-duration:18s;}
+.bacteria:nth-child(3){ left:50%; animation-duration:22s;}
+.bacteria:nth-child(4){ left:70%; animation-duration:17s;}
+.bacteria:nth-child(5){ left:90%; animation-duration:21s;}
 
 @keyframes float{
 
@@ -93,14 +95,31 @@ transform:rotate(360deg);
 
 }
 
+/* su simülasyonu */
+
+.water{
+width:200px;
+height:200px;
+margin:20px auto;
+border-radius:10px;
+background:brown;
+transition:2s;
+}
+
+.clean{
+background:#4fc3f7;
+}
+
+.progress{
+font-size:24px;
+margin-top:10px;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- HAREKET EDEN BAKTERİLER -->
-
-<div class="bacteria"></div>
 <div class="bacteria"></div>
 <div class="bacteria"></div>
 <div class="bacteria"></div>
@@ -111,6 +130,7 @@ transform:rotate(360deg);
 <!-- SAYFA 1 -->
 
 <div class="page active" id="page1">
+<div class="card">
 
 <h1>Bir Bakteri Suyu Temizleyebilir mi?</h1>
 
@@ -127,11 +147,13 @@ Denemek ister misin?
 </button>
 
 </div>
+</div>
 
 
 <!-- SAYFA 2 -->
 
 <div class="page" id="page2">
+<div class="card">
 
 <h2>Kirli suyu nasıl temizlersin?</h2>
 
@@ -143,22 +165,41 @@ Filtre kullanırım
 Kimyasal eklerim
 </button>
 
-<button onclick="alert('Doğru! Bazı bakteriler suyun temizlenmesine yardımcı olabilir.')">
+<button onclick="nextPage(3)">
 🦠 Bakteri kullanırım
 </button>
 
-<br><br>
-
-<button onclick="nextPage(3)">
-Devam
-</button>
-
+</div>
 </div>
 
 
-<!-- SAYFA 3 -->
+<!-- SAYFA 3 SİMÜLASYON -->
 
 <div class="page" id="page3">
+<div class="card">
+
+<h2>Mini Simülasyon</h2>
+
+<p>Kirli suya bakteri ekle.</p>
+
+<div class="water" id="water"></div>
+
+<div class="progress" id="progress">Temizlik: %0</div>
+
+<button onclick="cleanWater()">Bakteri Ekle 🦠</button>
+
+<br><br>
+
+<button onclick="nextPage(4)">Devam</button>
+
+</div>
+</div>
+
+
+<!-- SAYFA 4 -->
+
+<div class="page" id="page4">
+<div class="card">
 
 <h1>Bacillus subtilis</h1>
 
@@ -168,16 +209,18 @@ Devam
 • biyoteknolojide kullanılır
 </p>
 
-<button onclick="nextPage(4)">
+<button onclick="nextPage(5)">
 Projemizde ne yaptık?
 </button>
 
 </div>
+</div>
 
 
-<!-- SAYFA 4 -->
+<!-- SAYFA 5 -->
 
-<div class="page" id="page4">
+<div class="page" id="page5">
+<div class="card">
 
 <h1>Projemiz</h1>
 
@@ -191,20 +234,18 @@ Projemizde ne yaptık?
 
 </p>
 
-<b>Amaç:</b> bakterilerin su arıtmada kullanılma potansiyelini araştırmak.
-
-<br><br>
-
-<button onclick="nextPage(5)">
+<button onclick="nextPage(6)">
 Bilim Testi
 </button>
 
 </div>
+</div>
 
 
-<!-- SAYFA 5 -->
+<!-- QUIZ -->
 
-<div class="page" id="page5">
+<div class="page" id="page6">
+<div class="card">
 
 <h1>Bilim Testi</h1>
 
@@ -218,16 +259,16 @@ Bilim Testi
 
 <br>
 
-<button onclick="nextPage(6)">
-Son Sayfa
-</button>
+<button onclick="nextPage(7)">Son Sayfa</button>
 
+</div>
 </div>
 
 
-<!-- SAYFA 6 -->
+<!-- SON -->
 
-<div class="page" id="page6">
+<div class="page" id="page7">
+<div class="card">
 
 <h1>Teşekkürler!</h1>
 
@@ -237,18 +278,21 @@ Bu projeyi 6. sınıf öğrencileri olarak araştırdık.
 
 <br><br>
 
-Standımızı ziyaret etmeyi unutmayın.
+Standımızı ziyaret ettiğiniz için teşekkürler.
 
 </p>
 
 <h3>Artık mikro kahramanları tanıyorsun 🦠</h3>
 
+<button onclick="nextPage(1)">Başa Dön</button>
+
+</div>
 </div>
 
 
 <script>
 
-/* SAYFA GEÇİŞ */
+/* SAYFA */
 
 function nextPage(num){
 
@@ -260,7 +304,7 @@ document.getElementById("page"+num).classList.add("active");
 
 }
 
-/* ZİYARETÇİ SAYACI */
+/* ziyaretçi */
 
 let count=localStorage.getItem("visitorCount");
 
@@ -276,7 +320,29 @@ document.getElementById("visitorMessage").innerHTML =
 "🧪 Bakterilerin suyu arıtabildiğini öğrenen <b>"+count+".</b> kişisiniz!";
 
 
-/* QUIZ */
+/* su simülasyonu */
+
+function cleanWater(){
+
+document.getElementById("water").classList.add("clean");
+
+let percent=0;
+
+let interval=setInterval(function(){
+
+percent+=10;
+
+document.getElementById("progress").innerText="Temizlik: %"+percent;
+
+if(percent>=100){
+clearInterval(interval);
+}
+
+},200);
+
+}
+
+/* quiz */
 
 function quizCorrect(){
 document.getElementById("quizResult").innerHTML =
